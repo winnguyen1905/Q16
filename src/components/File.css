@@ -1,3 +1,4 @@
+/* File Explorer Styles */
 .file-explorer {
   max-width: 600px;
   margin: 20px auto;
@@ -7,11 +8,24 @@
   overflow: hidden;
 }
 
+/* Input Section */
 .input-section {
-  display: flex;
   padding: 15px;
   background-color: #f8f9fa;
   border-bottom: 1px solid #ddd;
+}
+
+.input-info {
+  margin-bottom: 10px;
+}
+
+.active-folder-info {
+  font-size: 12px;
+  color: #666;
+}
+
+.input-controls {
+  display: flex;
   gap: 10px;
 }
 
@@ -49,6 +63,7 @@
   transform: translateY(1px);
 }
 
+/* Message */
 .message {
   padding: 10px 15px;
   background-color: #fff3cd;
@@ -58,6 +73,7 @@
   text-align: center;
 }
 
+/* File Tree */
 .file-tree {
   padding: 15px;
   background-color: white;
@@ -65,6 +81,7 @@
 }
 
 .file-list {
+  /* Container for file items */
 }
 
 .file-item {
@@ -79,6 +96,7 @@
   cursor: pointer;
   transition: background-color 0.2s;
   user-select: none;
+  position: relative;
 }
 
 .item-row:hover {
@@ -91,6 +109,11 @@
 
 .item-row.file {
   font-weight: normal;
+}
+
+.item-row.active {
+  background-color: #e8f5e8 !important;
+  border: 2px solid #4CAF50;
 }
 
 .item-icon {
@@ -109,6 +132,26 @@
   margin-left: 8px;
 }
 
+.add-to-folder-btn {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  font-size: 12px;
+  cursor: pointer;
+  margin-left: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.add-to-folder-btn:hover {
+  background-color: #45a049;
+}
+
+/* Green button style matching the image */
 .item-row {
   background-color: #4CAF50;
   color: white;
@@ -120,6 +163,7 @@
   background-color: #45a049;
 }
 
+/* Different styles for nested levels */
 .item-row.folder {
   background-color: #4CAF50;
 }
@@ -128,6 +172,7 @@
   background-color: #66BB6A;
 }
 
+/* Empty state */
 .file-tree:empty::after {
   content: "No files or folders yet. Add some using the input above.";
   color: #666;
