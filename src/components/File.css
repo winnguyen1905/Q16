@@ -1,0 +1,138 @@
+.file-explorer {
+  max-width: 600px;
+  margin: 20px auto;
+  font-family: Arial, sans-serif;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.input-section {
+  display: flex;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #ddd;
+  gap: 10px;
+}
+
+.file-input {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.file-input:focus {
+  outline: none;
+  border-color: #4CAF50;
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+}
+
+.add-button {
+  padding: 8px 16px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  min-width: 40px;
+}
+
+.add-button:hover {
+  background-color: #45a049;
+}
+
+.add-button:active {
+  transform: translateY(1px);
+}
+
+.message {
+  padding: 10px 15px;
+  background-color: #fff3cd;
+  border: 1px solid #ffeaa7;
+  color: #856404;
+  font-size: 14px;
+  text-align: center;
+}
+
+.file-tree {
+  padding: 15px;
+  background-color: white;
+  min-height: 200px;
+}
+
+.file-list {
+}
+
+.file-item {
+  margin-bottom: 2px;
+}
+
+.item-row {
+  display: flex;
+  align-items: center;
+  padding: 6px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  user-select: none;
+}
+
+.item-row:hover {
+  background-color: #f0f0f0;
+}
+
+.item-row.folder {
+  font-weight: 500;
+}
+
+.item-row.file {
+  font-weight: normal;
+}
+
+.item-icon {
+  margin-right: 8px;
+  font-size: 16px;
+}
+
+.item-name {
+  flex: 1;
+  font-size: 14px;
+}
+
+.folder-indicator {
+  font-size: 12px;
+  color: #666;
+  margin-left: 8px;
+}
+
+.item-row {
+  background-color: #4CAF50;
+  color: white;
+  margin: 2px 0;
+  border-radius: 3px;
+}
+
+.item-row:hover {
+  background-color: #45a049;
+}
+
+.item-row.folder {
+  background-color: #4CAF50;
+}
+
+.item-row.file {
+  background-color: #66BB6A;
+}
+
+.file-tree:empty::after {
+  content: "No files or folders yet. Add some using the input above.";
+  color: #666;
+  font-style: italic;
+  display: block;
+  text-align: center;
+  padding: 40px 20px;
+}
