@@ -1,7 +1,6 @@
 import React from 'react';
 
-const FileList = ({ files, onUpdateItem, basePath, level = 0 }) => {
-  // handle folder click (toggle open/closed)
+const FileList = ({ files, onUpdateItem, onAddItem, onSetActiveFolder, activeFolderPath, basePath, level = 0 }) => {
   const handleFolderClick = (index, item) => {
     if (item.isOpen !== undefined || item.files) {
       const updatedItem = {
@@ -9,12 +8,14 @@ const FileList = ({ files, onUpdateItem, basePath, level = 0 }) => {
         isOpen: !item.isOpen
       };
       onUpdateItem([...basePath, index], updatedItem);
+      
+      if (updatedItem.isOpen) {
+        onSetActiveFolder([...basePath, index]);
+      }
     }
   };
 
-  // Handle doubleclick on file (  convert to folder)
   const handleFileDoubleClick = (index, item) => {
-    /// Only convert iff it's not already a folder
     if (item.isOpen === undefined && !item.files) {
       const updatedItem = {
         ...item,
@@ -25,9 +26,12 @@ const FileList = ({ files, onUpdateItem, basePath, level = 0 }) => {
     }
   };
 
-  // Checkk if item is a folder
   const isFolder = (item) => {
     return item.isOpen !== undefined || item.files !== undefined;
+  };
+
+  const isActivePath = (path) => {
+    return JSON.stringify(path) === JSON.stringify(activeFolderPath);
   };
 
   return (
@@ -35,11 +39,12 @@ const FileList = ({ files, onUpdateItem, basePath, level = 0 }) => {
       {files.map((item, index) => {
         const itemIsFolder = isFolder(item);
         const currentPath = [...basePath, index];
+        const isActive = isActivePath(currentPath);
         
         return (
           <div key={index} className="file-item">
             <div 
-              className={`item-row ${itemIsFolder ? 'folder' : 'file'}`}
+              className={`item-row ${itemIsFolder ? 'folder' : 'file'} ${isActive ? 'active' : ''}`}
               style={{ paddingLeft: `${level * 20}px` }}
               onClick={() => handleFolderClick(index, item)}
               onDoubleClick={() => handleFileDoubleClick(index, item)}
@@ -53,13 +58,27 @@ const FileList = ({ files, onUpdateItem, basePath, level = 0 }) => {
                   {item.isOpen ? '▼' : '▶'}
                 </span>
               )}
+              {itemIsFolder && (
+                <button 
+                  className="add-to-folder-btn"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onAddItem(currentPath);
+                  }}
+                  title="Add to this folder"
+                >
+                  +
+                </button>
+              )}
             </div>
             
-            {/* rendering children if folder is open .... */}
             {itemIsFolder && item.isOpen && item.files && (
               <FileList
                 files={item.files}
                 onUpdateItem={onUpdateItem}
+                onAddItem={onAddItem}
+                onSetActiveFolder={onSetActiveFolder}
+                activeFolderPath={activeFolderPath}
                 basePath={currentPath}
                 level={level + 1}
               />
