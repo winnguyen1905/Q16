@@ -1,17 +1,36 @@
 import React from 'react';
+import File from './components/File';
 import './App.css';
-import 'h8k-components';
-import File from "./components/File";
 
-const title = "File Folder Structure";
+const initialData = {
+  "name": "src",
+  "isOpen": true,
+  "files": [
+    {
+      "name": "App.js"
+    },
+    {
+      "name": "components",
+      "isOpen": false,
+      "files": [{ "name": "File.js" }]
+    }
+  ]
+};
 
-const App = () => {
-    return (
-        <div className="App">
-            <h8k-navbar header={title}></h8k-navbar>
-            <File />
-        </div>
-    );
+function App() {
+  return (
+    <div className="App">
+      <header className="App-header">
+        <h1>File Explorer Component</h1>
+      </header>
+      <main>
+        <File 
+          files={initialData.files} 
+          input-box={true}
+        />
+      </main>
+    </div>
+  );
 }
 
 export default App;
