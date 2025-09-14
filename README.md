@@ -2,6 +2,16 @@
 
 <!-- Mermaid (GitHub, GitLab, etc.) -->
 ```mermaid
+sequenceDiagram
+  autonumber
+  participant Alice
+  participant Bob
+
+  Alice->>Alice: Mỗi tin nhắn: CK_send → KDF → MK_i; advance CK_send'
+  Alice->>Bob: Gửi header {optional new DH_pub, PN, N} + AEAD(MK_i, AAD)
+  Bob->>Bob: Nếu có new DH_pub → DH ratchet → update RootKey & CK_recv
+  Bob->>Bob: CK_recv → KDF → MK_i; decrypt; advance CK_recv'
+
 flowchart TD
   %% ===================== ACTORS =====================
   subgraph Alice["Alice device (client)"]
@@ -69,3 +79,4 @@ flowchart TD
   A5 <-->|"⑬ Double Ratchet tiếp tục (encrypt/decrypt)"| B6
   B6 <--> M1
   M1 <--> A5
+
