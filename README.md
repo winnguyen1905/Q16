@@ -1,16 +1,7 @@
 # X3DH + Double Ratchet (Atala PRISM integration)
 
 <!-- Mermaid (GitHub, GitLab, etc.) -->
-```mermaid
-sequenceDiagram
-  autonumber
-  participant Alice
-  participant Bob
-
-  Alice->>Alice: Mỗi tin nhắn: CK_send → KDF → MK_i; advance CK_send'
-  Alice->>Bob: Gửi header {optional new DH_pub, PN, N} + AEAD(MK_i, AAD)
-  Bob->>Bob: Nếu có new DH_pub → DH ratchet → update RootKey & CK_recv
-  Bob->>Bob: CK_recv → KDF → MK_i; decrypt; advance CK_recv'
+```mermaid 
 
 flowchart TD
   %% ===================== ACTORS =====================
