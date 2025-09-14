@@ -3,6 +3,7 @@
 <!-- Mermaid (GitHub, GitLab, etc.) -->
 ```mermaid
 flowchart LR
+  %% Order markers (1)→(7) on edges
   subgraph Alice["Alice device (client)"]
     A1["Ed25519 DID keypair (sign/verify)<br/>Private stays on device"]
     A2["X25519 Identity keypair (IK_A)"]
@@ -21,10 +22,11 @@ flowchart LR
     K1["Prekey bundle:<br/>{ IK_A_pub, SPK_A_pub, sig_A(Ed25519), OPK ids }"]
   end
 
-  A1 -->|publish Ed25519 public| P1
-  A3 -->|SPK signed by| A1
-  A1 -->|update DID Doc/service| P2
-  A2 --> K1
-  A3 --> K1
-  A4 --> K1
-  P2 --> K1
+  A1 -- "(1) publish Ed25519 public" --> P1
+  A3 -- "(2) SPK signed by A1 (Ed25519)" --> A1
+  A1 -- "(3) update DID Doc/service" --> P2
+  A2 -- "(4) upload IK_A_pub" --> K1
+  A3 -- "(5) upload SPK_A_pub + signature" --> K1
+  A4 -- "(6) upload OPK_A ids" --> K1
+  P2 -- "(7) PRISM points clients to Prekey API" --> K1
+
